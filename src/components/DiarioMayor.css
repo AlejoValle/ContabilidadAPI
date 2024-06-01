@@ -1,0 +1,75 @@
+/* src/components/DiarioMayor.css */
+
+/* Contenedor principal del diario */
+.diario-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh; /* Hace que el contenedor ocupe al menos toda la altura de la ventana */
+    box-sizing: border-box;
+}
+
+/* Estilos para la tabla del diario */
+.diario-table {
+    width: 80%; /* Ajusta el ancho según tus necesidades */
+    max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.diario-table th,
+.diario-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.diario-table th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para el formulario del diario */
+.diario-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.diario-form input {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Botón para agregar registros */
+.diario-button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Hace que el botón tenga el mismo ancho que los inputs */
+    box-sizing: border-box;
+}
+
+.diario-button:hover {
+    background-color: #45a049;
+}
+
+/* Botón para eliminar registros */
+.diario-delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.diario-delete-button:hover {
+    background-color: #da190b;
+}
