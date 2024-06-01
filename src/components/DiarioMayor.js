@@ -1,6 +1,6 @@
 // src/components/DiarioMayor.js
 import React, { useState, useEffect } from 'react';
-import { addRegistro, getRegistros, deleteRegistro } from '../../../contabilidadapp/src/indexedDB';
+import { addRegistro, getRegistros, deleteRegistro } from '../indexedDB';
 import './DiarioMayor.css';
 import { v4 as uuidv4 } from 'uuid';
 
