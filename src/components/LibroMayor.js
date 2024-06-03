@@ -25,29 +25,28 @@ const LibroMayor = () => {
         const libroMayor = [];
         const agrupadoPorDesglose = registros.reduce((acc, registro) => {
             const { desglose, codigo, fecha, debe, haber } = registro;
-            const saldo = (debe ? parseFloat(debe) : 0) + (haber ? parseFloat(haber) : 0); // Sumar el haber como valor positivo
 
             if (!acc[codigo]) {
                 acc[codigo] = [];
             }
 
-            acc[codigo].push({ desglose, fecha, saldo });
+            acc[codigo].push({ desglose, fecha, debe: parseFloat(debe) || 0, haber: parseFloat(haber) || 0 });
 
             return acc;
         }, {});
 
         for (const codigo in agrupadoPorDesglose) {
             const registrosDesglose = agrupadoPorDesglose[codigo];
-            const debe = registrosDesglose.reduce((total, registro) => total + (registro.saldo > 0 ? registro.saldo : 0), 0);
-            const haber = registrosDesglose.reduce((total, registro) => total + (registro.saldo < 0 ? -registro.saldo : 0), 0);
-            const saldo = debe - haber; // Calcular el saldo como la diferencia entre el debe y el haber
+            const debeTotal = registrosDesglose.reduce((total, registro) => total + registro.debe, 0);
+            const haberTotal = registrosDesglose.reduce((total, registro) => total + registro.haber, 0);
+            const saldo = debeTotal + haberTotal;  // Cambiado a suma
 
             libroMayor.push({
                 codigo,
-                desglose: registrosDesglose[0].desglose, // Tomar el primer registro para obtener el desglose
+                desglose: registrosDesglose[0].desglose, // Toma el primer registro para obtener el desglose
                 registros: registrosDesglose,
-                debe,
-                haber,
+                debe: debeTotal,
+                haber: haberTotal,
                 saldo,
             });
         }
@@ -77,10 +76,10 @@ const LibroMayor = () => {
                             <tr key={index}>
                                 <td>{registro.codigo}</td>
                                 <td>{reg.fecha}</td>
-                                <td>{registro.desglose}</td>
-                                <td>${reg.saldo > 0 ? reg.saldo.toFixed(2) : ''}</td> {/* Agregar el signo de dólar */}
-                                <td>${reg.saldo < 0 ? (-reg.saldo).toFixed(2) : ''}</td> {/* Agregar el signo de dólar */}
-                                <td>${reg.saldo.toFixed(2)}</td> {/* Agregar el signo de dólar */}
+                                <td>{reg.desglose}</td>
+                                <td>${reg.debe > 0 ? reg.debe.toFixed(2) : ''}</td> {/* Agregar el signo de dólar */}
+                                <td>${reg.haber > 0 ? reg.haber.toFixed(2) : ''}</td> {/* Agregar el signo de dólar */}
+                                <td>${Math.abs(reg.debe - reg.haber).toFixed(2)}</td> {/* Agregar el signo de dólar */}
                             </tr>
                         ))}
                         </tbody>
@@ -89,12 +88,11 @@ const LibroMayor = () => {
                             <td colSpan="3">Totales</td>
                             <td>${registro.debe.toFixed(2)}</td> {/* Agregar el signo de dólar */}
                             <td>${registro.haber.toFixed(2)}</td> {/* Agregar el signo de dólar */}
-                            <td>${registro.saldo.toFixed(2)}</td> {/* Agregar el signo de dólar */}
+                            <td>${Math.abs(registro.saldo).toFixed(2)}</td> {/* Agregar el signo de dólar */}
                         </tr>
                         </tfoot>
                     </table>
                 </div>
-
             ))}
             <button onClick={handlediario} className="return-button">
                 return

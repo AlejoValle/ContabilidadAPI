@@ -1,0 +1,42 @@
+.libro-estados-financieros-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.estado-financiero {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.estado-financiero table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+
+.estado-financiero th, .estado-financiero td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.estado-financiero th {
+    background-color: #f2f2f2;
+}
+
+.estado-financiero td input {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-align: right;
+}
+
+.estado-financiero h2, .estado-financiero h3 {
+    margin: 10px 0;
+}
