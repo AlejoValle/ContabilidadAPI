@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getRegistros } from '../indexedDB';
 import './LibroMayor.css';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LibroMayor = () => {
     const [libroMayor, setLibroMayor] = useState([]);
@@ -25,7 +25,7 @@ const LibroMayor = () => {
         const libroMayor = [];
         const agrupadoPorDesglose = registros.reduce((acc, registro) => {
             const { desglose, codigo, fecha, debe, haber } = registro;
-            const saldo = debe ? parseFloat(debe) : -parseFloat(haber);
+            const saldo = (debe ? parseFloat(debe) : 0) + (haber ? parseFloat(haber) : 0); // Sumar el haber como valor positivo
 
             if (!acc[codigo]) {
                 acc[codigo] = [];
@@ -40,11 +40,11 @@ const LibroMayor = () => {
             const registrosDesglose = agrupadoPorDesglose[codigo];
             const debe = registrosDesglose.reduce((total, registro) => total + (registro.saldo > 0 ? registro.saldo : 0), 0);
             const haber = registrosDesglose.reduce((total, registro) => total + (registro.saldo < 0 ? -registro.saldo : 0), 0);
-            const saldo = debe - haber;
+            const saldo = debe - haber; // Calcular el saldo como la diferencia entre el debe y el haber
 
             libroMayor.push({
                 codigo,
-                desglose: registrosDesglose[0].desglose, // Toma el primer registro para obtener el desglose
+                desglose: registrosDesglose[0].desglose, // Tomar el primer registro para obtener el desglose
                 registros: registrosDesglose,
                 debe,
                 haber,
@@ -78,18 +78,18 @@ const LibroMayor = () => {
                                 <td>{registro.codigo}</td>
                                 <td>{reg.fecha}</td>
                                 <td>{registro.desglose}</td>
-                                <td>{reg.saldo > 0 ? reg.saldo.toFixed(2) : ''}</td>
-                                <td>{reg.saldo < 0 ? (-reg.saldo).toFixed(2) : ''}</td>
-                                <td>{reg.saldo.toFixed(2)}</td>
+                                <td>${reg.saldo > 0 ? reg.saldo.toFixed(2) : ''}</td> {/* Agregar el signo de dólar */}
+                                <td>${reg.saldo < 0 ? (-reg.saldo).toFixed(2) : ''}</td> {/* Agregar el signo de dólar */}
+                                <td>${reg.saldo.toFixed(2)}</td> {/* Agregar el signo de dólar */}
                             </tr>
                         ))}
                         </tbody>
                         <tfoot>
                         <tr>
                             <td colSpan="3">Totales</td>
-                            <td>{registro.debe.toFixed(2)}</td>
-                            <td>{registro.haber.toFixed(2)}</td>
-                            <td>{registro.saldo.toFixed(2)}</td>
+                            <td>${registro.debe.toFixed(2)}</td> {/* Agregar el signo de dólar */}
+                            <td>${registro.haber.toFixed(2)}</td> {/* Agregar el signo de dólar */}
+                            <td>${registro.saldo.toFixed(2)}</td> {/* Agregar el signo de dólar */}
                         </tr>
                         </tfoot>
                     </table>

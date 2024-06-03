@@ -15,12 +15,14 @@ const DiarioMayor = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await getRegistros();
-            setRegistros(Array.isArray(data) ? data : []);
-            setNextId(data.length + 1);
+            const ordenados = Array.isArray(data) ? data.sort((a, b) => a.asiento - b.asiento) : [];
+            setRegistros(ordenados);
+            setNextId(ordenados.length + 1);
         };
 
         fetchData();
     }, []);
+
 
     const handleDebeChange = (event) => {
         setDebe(event.target.value);
