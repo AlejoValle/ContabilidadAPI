@@ -1,0 +1,41 @@
+.return-button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Hace que el botón tenga el mismo ancho que los inputs */
+    box-sizing: border-box;
+}
+.libro-mayor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.libro-mayor-card {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.libro-mayor-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.libro-mayor-card th,
+.libro-mayor-card td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.libro-mayor-card th {
+    background-color: #f2f2f2;
+}
