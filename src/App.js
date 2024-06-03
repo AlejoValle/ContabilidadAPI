@@ -5,6 +5,7 @@ import DiarioMayor from './components/DiarioMayor';
 import Home from './components/Home'; // Suponiendo que tienes un componente Home
 import LibroMayor from './components/LibroMayor'; // Importar el componente LibroMayor
 import LibroEstadosFinancieros from "./components/LibroEstadosFinancieros";
+import RegistroAccionistas  from "./components/RegistroAccionistas";
 const App = () => {
   return (
       <Router>
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/DiarioMayor" element={<DiarioMayor />} />
             <Route path="/LibroMayor" element={<LibroMayor />} /> // Agregar la ruta para el componente LibroMayor
             <Route path="/LibroEstadosFinancieros" element={<LibroEstadosFinancieros />} />
+            <Route path="/RegistroAccionistas" element={<RegistroAccionistas />} />
         </Routes>
       </Router>
   );
