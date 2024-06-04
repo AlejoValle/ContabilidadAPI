@@ -1,3 +1,4 @@
+/* Contenedor principal */
 .registro-accionistas-container {
     display: flex;
     flex-direction: column;
@@ -5,32 +6,66 @@
     padding: 20px;
 }
 
+/* Formulario */
 .registro-accionistas-form {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 20px;
+    max-width: 800px;
+    width: 100%;
 }
 
 .registro-accionistas-form input {
-    padding: 8px;
+    flex: 1 1 45%;
+    padding: 10px;
     border: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 .registro-accionistas-button {
-    padding: 10px;
+    padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-    grid-column: 1 / -1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .registro-accionistas-button:hover {
     background-color: #45a049;
 }
 
+/* Tarjetas de registro */
+.registro-accionistas-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.registro-accionistas-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px; /* Ajusta según sea necesario */
+    box-sizing: border-box;
+}
+
+.registro-accionistas-card h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Tabla dentro de la tarjeta */
 .registro-accionistas-table {
     width: 100%;
     border-collapse: collapse;
@@ -47,6 +82,7 @@
     background-color: #f2f2f2;
 }
 
+/* Botón de eliminar */
 .registro-accionistas-delete-button {
     background-color: #f44336;
     color: white;
@@ -54,8 +90,74 @@
     padding: 5px 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
 }
 
 .registro-accionistas-delete-button:hover {
     background-color: #da190b;
 }
+
+/* Media queries para diseño responsive */
+@media (max-width: 768px) {
+    .registro-accionistas-form input {
+        flex: 1 1 100%;
+    }
+
+    .registro-accionistas-card {
+        max-width: 100%;
+    }
+
+    .registro-accionistas-table,
+    .registro-accionistas-table tbody,
+    .registro-accionistas-table tr,
+    .registro-accionistas-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .registro-accionistas-table thead {
+        display: none;
+    }
+
+    .registro-accionistas-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .registro-accionistas-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .registro-accionistas-container {
+        padding: 10px;
+    }
+
+    .registro-accionistas-form input {
+        padding: 8px;
+    }
+
+    .registro-accionistas-button {
+        padding: 8px 16px;
+    }
+
+    .registro-accionistas-card {
+        padding: 15px;
+    }
+
+    .registro-accionistas-table th,
+    .registro-accionistas-table td {
+        padding: 5px;
+    }
+}
+
