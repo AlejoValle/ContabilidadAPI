@@ -3,6 +3,20 @@ import jsPDF from 'jspdf';
 import { addRegistroCapital, getRegistrosCapital, deleteRegistroCapital } from '../indexedDB';
 import './LibroCapital.css';
 
+const inputs = [
+    { name: 'numeroRegistro', placeholder: 'N° de registro', type: 'text' },
+    { name: 'dia', placeholder: 'Día', type: 'text' },
+    { name: 'año', placeholder: 'Año', type: 'text' },
+    { name: 'hora', placeholder: 'Hora', type: 'text' },
+    { name: 'accion', placeholder: 'Acción', type: 'text' },
+    { name: 'cantidad', placeholder: 'Cantidad', type: 'number' },
+];
+
+const months = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
 const LibroCapital = () => {
     const [registros, setRegistros] = useState([]);
     const [nuevoRegistro, setNuevoRegistro] = useState({
@@ -99,64 +113,31 @@ const LibroCapital = () => {
         <div className="libro-capital-container">
             <h1>Libro de Capital</h1>
             <form onSubmit={handleSubmit} className="libro-capital-form">
-                <input
-                    type="text"
-                    name="numeroRegistro"
-                    value={nuevoRegistro.numeroRegistro}
-                    onChange={handleInputChange}
-                    placeholder="N° de registro"
-                    required
-                />
-                <input
-                    type="text"
-                    name="dia"
-                    value={nuevoRegistro.dia}
-                    onChange={handleInputChange}
-                    placeholder="Día"
-                    required
-                />
-                <input
-                    type="text"
-                    name="mes"
-                    value={nuevoRegistro.mes}
-                    onChange={handleInputChange}
-                    placeholder="Mes"
-                    required
-                />
-                <input
-                    type="text"
-                    name="año"
-                    value={nuevoRegistro.año}
-                    onChange={handleInputChange}
-                    placeholder="Año"
-                    required
-                />
-                <input
-                    type="text"
-                    name="hora"
-                    value={nuevoRegistro.hora}
-                    onChange={handleInputChange}
-                    placeholder="Hora"
-                    required
-                />
-                <select
-                    name="accion"
-                    value={nuevoRegistro.accion}
-                    onChange={handleInputChange}
-                    required
-                >
-                    <option value="">Seleccione una acción</option>
-                    <option value="Aumento de capital">Aumento de capital</option>
-                    <option value="Disminución de capital">Disminución de capital</option>
-                </select>
-                <input
-                    type="number"
-                    name="cantidad"
-                    value={nuevoRegistro.cantidad}
-                    onChange={handleInputChange}
-                    placeholder="Cantidad"
-                    required
-                />
+                {inputs.map((input) => (
+                    <div className="input-container" key={input.name}>
+                        <input
+                            type={input.type}
+                            name={input.name}
+                            value={nuevoRegistro[input.name]}
+                            onChange={handleInputChange}
+                            placeholder={input.placeholder}
+                            required
+                        />
+                    </div>
+                ))}
+                <div className="input-container">
+                    <select
+                        name="mes"
+                        value={nuevoRegistro.mes}
+                        onChange={handleInputChange}
+                        required
+                    >
+                        <option value="">Seleccione Mes</option>
+                        {months.map((month, index) => (
+                            <option key={index} value={month}>{month}</option>
+                        ))}
+                    </select>
+                </div>
                 <button type="submit" className="libro-capital-button">
                     Agregar Registro
                 </button>
