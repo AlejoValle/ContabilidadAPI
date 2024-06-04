@@ -1,3 +1,4 @@
+//Diariomayor.js
 import React, { useState, useEffect } from 'react';
 import { addRegistro, getRegistros, deleteRegistro } from '../indexedDB';
 import './DiarioMayor.css';

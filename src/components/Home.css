@@ -1,0 +1,164 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+/* Header styles */
+header {
+    background-color: #1a202c;
+    color: white;
+    padding: 20px 0;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+header p {
+    color: #a0aec0;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main content styles */
+main {
+    flex: 1;
+}
+
+section {
+    padding: 60px 0;
+}
+
+section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+section p {
+    margin-bottom: 20px;
+}
+
+section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+section ul li {
+    margin-bottom: 10px;
+}
+
+.section-dark {
+    background-color: #f7fafc;
+}
+
+/* Services styles */
+#services .grid {
+    display: grid;
+    gap: 20px;
+}
+
+#services .grid div {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#services .grid svg {
+    margin-right: 10px;
+}
+
+#services .grid h3 {
+    font-size: 20px;
+}
+
+/* Contact styles */
+#contact form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#contact form div {
+    margin-bottom: 20px;
+}
+
+#contact form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#contact form input,
+#contact form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+}
+
+#contact form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #2d3748;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#contact form button:hover {
+    background-color: #4a5568;
+}
+
+/* Footer styles */
+footer {
+    background-color: #1a202c;
+    color: white;
+    padding: 20px 0;
+}
+
+footer .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+footer nav a:hover {
+    text-decoration: underline;
+}

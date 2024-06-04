@@ -1,4 +1,3 @@
-// src/indexedDB.js
 export const openDatabase = async () => {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('DiarioMayorDB', 2);
@@ -9,7 +8,10 @@ export const openDatabase = async () => {
                 db.createObjectStore('registros', { keyPath: 'id' });
             }
             if (!db.objectStoreNames.contains('registrosAccionistas')) {
-                db.createObjectStore('registrosAccionistas', { autoIncrement: true }); // Cambio en la línea 18
+                db.createObjectStore('registrosAccionistas', { autoIncrement: true });
+            }
+            if (!db.objectStoreNames.contains('registrosCapital')) { // Añadir store para registros de capital
+                db.createObjectStore('registrosCapital', { keyPath: 'id' });
             }
         };
 
@@ -88,6 +90,43 @@ export const deleteRegistroAccionista = async (id) => {
     return new Promise((resolve, reject) => {
         const tx = db.transaction('registrosAccionistas', 'readwrite');
         const store = tx.objectStore('registrosAccionistas');
+        const request = store.delete(id);
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+    });
+};
+
+// Nuevas funciones para registros de capital
+export const addRegistroCapital = async (registro) => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction('registrosCapital', 'readwrite');
+        const store = tx.objectStore('registrosCapital');
+        const request = store.add(registro);
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+    });
+};
+
+export const getRegistrosCapital = async () => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction('registrosCapital', 'readonly');
+        const store = tx.objectStore('registrosCapital');
+        const request = store.getAll();
+
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => reject(request.error);
+    });
+};
+
+export const deleteRegistroCapital = async (id) => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction('registrosCapital', 'readwrite');
+        const store = tx.objectStore('registrosCapital');
         const request = store.delete(id);
 
         request.onsuccess = () => resolve();

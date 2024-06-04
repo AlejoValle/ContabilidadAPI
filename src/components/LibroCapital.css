@@ -1,0 +1,92 @@
+/* src/components/LibroCapital.css */
+.libro-capital-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.libro-capital-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    flex: 1 1 45%;
+    min-width: 300px;
+}
+
+.libro-capital-form input,
+.libro-capital-form select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.libro-capital-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.libro-capital-registros {
+    margin-top: 20px;
+}
+
+.libro-capital-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.libro-capital-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.libro-capital-table th,
+.libro-capital-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.libro-capital-download-button,
+.libro-capital-delete-button {
+    margin-top: 10px;
+    padding: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.libro-capital-download-button {
+    background-color: #008CBA;
+}
+
+.libro-capital-delete-button {
+    background-color: #f44336;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .input-container {
+        flex: 1 1 100%;
+    }
+
+    .libro-capital-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .libro-capital-button {
+        max-width: 100%;
+    }
+}
+
