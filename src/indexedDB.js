@@ -1,8 +1,6 @@
-// src/indexedDB.js
-
 export const openDatabase = async () => {
     return new Promise((resolve, reject) => {
-        const request = indexedDB.open('DiarioMayorDB', 4); // Asegúrate de incrementar la versión de la base de datos
+        const request = indexedDB.open('DiarioMayorDB', 6); // Incrementa la versión de la base de datos
 
         request.onupgradeneeded = (event) => {
             const db = event.target.result;
@@ -20,6 +18,12 @@ export const openDatabase = async () => {
             }
             if (!db.objectStoreNames.contains('registrosCompras')) {
                 db.createObjectStore('registrosCompras', { keyPath: 'id' });
+            }
+            if (!db.objectStoreNames.contains('registrosVentas')) {
+                db.createObjectStore('registrosVentas', { keyPath: 'id' });
+            }
+            if (!db.objectStoreNames.contains('registrosVentasConsumidor')) {
+                db.createObjectStore('registrosVentasConsumidor', { keyPath: 'id' });
             }
         };
 
@@ -84,6 +88,10 @@ export const addRegistroAccionista = async (registro) => {
 export const getRegistrosAccionistas = async () => {
     const db = await openDatabase();
     return new Promise((resolve, reject) => {
+        if (!db.objectStoreNames.contains('registrosAccionistas')) {
+            reject(new Error('La tienda de objetos registrosAccionistas no existe.'));
+            return;
+        }
         const tx = db.transaction('registrosAccionistas', 'readonly');
         const store = tx.objectStore('registrosAccionistas');
         const request = store.getAll();
@@ -121,6 +129,10 @@ export const addRegistroCapital = async (registro) => {
 export const getRegistrosCapital = async () => {
     const db = await openDatabase();
     return new Promise((resolve, reject) => {
+        if (!db.objectStoreNames.contains('registrosCapital')) {
+            reject(new Error('La tienda de objetos registrosCapital no existe.'));
+            return;
+        }
         const tx = db.transaction('registrosCapital', 'readonly');
         const store = tx.objectStore('registrosCapital');
         const request = store.getAll();
@@ -158,6 +170,10 @@ export const addActaJunta = async (acta) => {
 export const getActasJunta = async () => {
     const db = await openDatabase();
     return new Promise((resolve, reject) => {
+        if (!db.objectStoreNames.contains('actasJunta')) {
+            reject(new Error('La tienda de objetos actasJunta no existe.'));
+            return;
+        }
         const tx = db.transaction('actasJunta', 'readonly');
         const store = tx.objectStore('actasJunta');
         const request = store.getAll();
@@ -195,6 +211,10 @@ export const addRegistroCompras = async (registro) => {
 export const getRegistrosCompras = async () => {
     const db = await openDatabase();
     return new Promise((resolve, reject) => {
+        if (!db.objectStoreNames.contains('registrosCompras')) {
+            reject(new Error('La tienda de objetos registrosCompras no existe.'));
+            return;
+        }
         const tx = db.transaction('registrosCompras', 'readonly');
         const store = tx.objectStore('registrosCompras');
         const request = store.getAll();
@@ -209,6 +229,88 @@ export const deleteRegistroCompras = async (id) => {
     return new Promise((resolve, reject) => {
         const tx = db.transaction('registrosCompras', 'readwrite');
         const store = tx.objectStore('registrosCompras');
+        const request = store.delete(id);
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+    });
+};
+
+// Funciones para registros de ventas
+export const addRegistroVentas = async (registro) => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction('registrosVentas', 'readwrite');
+        const store = tx.objectStore('registrosVentas');
+        const request = store.add(registro);
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+    });
+};
+
+export const getRegistrosVentas = async () => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        if (!db.objectStoreNames.contains('registrosVentas')) {
+            reject(new Error('La tienda de objetos registrosVentas no existe.'));
+            return;
+        }
+        const tx = db.transaction('registrosVentas', 'readonly');
+        const store = tx.objectStore('registrosVentas');
+        const request = store.getAll();
+
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => reject(request.error);
+    });
+};
+
+export const deleteRegistroVentas = async (id) => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction('registrosVentas', 'readwrite');
+        const store = tx.objectStore('registrosVentas');
+        const request = store.delete(id);
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+    });
+};
+
+// Funciones para registros de ventas a consumidor final
+export const addRegistroVentasConsumidor = async (registro) => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction('registrosVentasConsumidor', 'readwrite');
+        const store = tx.objectStore('registrosVentasConsumidor');
+        const request = store.add(registro);
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+    });
+};
+
+export const getRegistrosVentasConsumidor = async () => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        if (!db.objectStoreNames.contains('registrosVentasConsumidor')) {
+            reject(new Error('La tienda de objetos registrosVentasConsumidor no existe.'));
+            return;
+        }
+        const tx = db.transaction('registrosVentasConsumidor', 'readonly');
+        const store = tx.objectStore('registrosVentasConsumidor');
+        const request = store.getAll();
+
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => reject(request.error);
+    });
+};
+
+export const deleteRegistroVentasConsumidor = async (id) => {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction('registrosVentasConsumidor', 'readwrite');
+        const store = tx.objectStore('registrosVentasConsumidor');
         const request = store.delete(id);
 
         request.onsuccess = () => resolve();

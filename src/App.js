@@ -9,6 +9,8 @@ import RegistroAccionistas from './components/RegistroAccionistas';
 import LibroCapital from './components/LibroCapital'; // Importa el nuevo componente
 import ActaJuntaAccionistas from "./components/ActaJuntaAccionistas";
 import LibroCompras from "./components/LibroCompras";
+import LibroVentasContribuyente from './components/LibroVentasContribuyente'; // Importa el nuevo componente
+import LibroVentasConsumidor from "./components/LibroVentasConsumidor";
 
 const App = () => {
     return (
@@ -22,6 +24,8 @@ const App = () => {
                 <Route path="/LibroCapital" element={<LibroCapital />} /> {/* Agrega la nueva ruta */}
                 <Route path="/ActaJuntaAccionistas" element={<ActaJuntaAccionistas />} />
                 <Route path="/LibroCompras" element={<LibroCompras />} />
+                <Route path="/LibroVentasContribuyente" element={<LibroVentasContribuyente />} /> {/* Agrega la nueva ruta */}
+                <Route path="/LibroVentasConsumidor" element={<LibroVentasConsumidor />} />
             </Routes>
         </Router>
     );

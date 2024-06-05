@@ -1,0 +1,133 @@
+/* Contenedor principal */
+.libro-ventas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Formulario */
+.libro-ventas-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.libro-ventas-form .input-container {
+    flex: 1 1 45%;
+}
+
+.libro-ventas-form input,
+.libro-ventas-form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.libro-ventas-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.libro-ventas-button:hover {
+    background-color: #45a049;
+}
+
+/* Tabla de registros */
+.libro-ventas-registros {
+    width: 100%;
+}
+
+.libro-ventas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.libro-ventas-table th,
+.libro-ventas-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.libro-ventas-table th {
+    background-color: #f2f2f2;
+}
+
+.libro-ventas-delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.libro-ventas-delete-button:hover {
+    background-color: #da190b;
+}
+
+/* Media queries para diseño responsive */
+@media (max-width: 768px) {
+    .libro-ventas-form .input-container {
+        flex: 1 1 100%;
+    }
+
+    .libro-ventas-table,
+    .libro-ventas-table tbody,
+    .libro-ventas-table tr,
+    .libro-ventas-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .libro-ventas-table thead {
+        display: none;
+    }
+
+    .libro-ventas-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .libro-ventas-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .libro-ventas-container {
+        padding: 10px;
+    }
+
+    .libro-ventas-form input {
+        padding: 8px;
+    }
+
+    .libro-ventas-button {
+        padding: 8px 16px;
+    }
+
+    .libro-ventas-table th,
+    .libro-ventas-table td {
+        padding: 5px;
+    }
+}
