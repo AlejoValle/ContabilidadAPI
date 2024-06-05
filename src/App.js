@@ -7,6 +7,8 @@ import LibroMayor from './components/LibroMayor';
 import LibroEstadosFinancieros from './components/LibroEstadosFinancieros';
 import RegistroAccionistas from './components/RegistroAccionistas';
 import LibroCapital from './components/LibroCapital'; // Importa el nuevo componente
+import ActaJuntaAccionistas from "./components/ActaJuntaAccionistas";
+import LibroCompras from "./components/LibroCompras";
 
 const App = () => {
     return (
@@ -18,6 +20,8 @@ const App = () => {
                 <Route path="/LibroEstadosFinancieros" element={<LibroEstadosFinancieros />} />
                 <Route path="/RegistroAccionistas" element={<RegistroAccionistas />} />
                 <Route path="/LibroCapital" element={<LibroCapital />} /> {/* Agrega la nueva ruta */}
+                <Route path="/ActaJuntaAccionistas" element={<ActaJuntaAccionistas />} />
+                <Route path="/LibroCompras" element={<LibroCompras />} />
             </Routes>
         </Router>
     );

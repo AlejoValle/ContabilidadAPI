@@ -1,0 +1,33 @@
+.acta-junta-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.selector-container {
+    margin-bottom: 20px;
+}
+
+.selector-container label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.pdf-container {
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.download-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
+}

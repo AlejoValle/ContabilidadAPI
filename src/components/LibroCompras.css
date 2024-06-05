@@ -1,0 +1,163 @@
+/* src/components/LibroCompras.css */
+
+/* Contenedor principal del libro de compras */
+.libro-compras-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Formulario */
+.libro-compras-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.libro-compras-form input,
+.libro-compras-form button {
+    flex: 1 1 45%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.libro-compras-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.libro-compras-button:hover {
+    background-color: #45a049;
+}
+
+/* Tarjetas de registro */
+.libro-compras-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.libro-compras-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+.libro-compras-card h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Tabla dentro de la tarjeta */
+.libro-compras-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.libro-compras-table th,
+.libro-compras-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.libro-compras-table th {
+    background-color: #f2f2f2;
+}
+
+/* Botón de eliminar */
+.libro-compras-delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.libro-compras-delete-button:hover {
+    background-color: #da190b;
+}
+
+/* Media queries para diseño responsive */
+@media (max-width: 768px) {
+    .libro-compras-form input {
+        flex: 1 1 100%;
+    }
+
+    .libro-compras-card {
+        max-width: 100%;
+    }
+
+    .libro-compras-table,
+    .libro-compras-table tbody,
+    .libro-compras-table tr,
+    .libro-compras-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .libro-compras-table thead {
+        display: none;
+    }
+
+    .libro-compras-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .libro-compras-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .libro-compras-container {
+        padding: 10px;
+    }
+
+    .libro-compras-form input {
+        padding: 8px;
+    }
+
+    .libro-compras-button {
+        padding: 8px 16px;
+    }
+
+    .libro-compras-card {
+        padding: 15px;
+    }
+
+    .libro-compras-table th,
+    .libro-compras-table td {
+        padding: 5px;
+    }
+}
