@@ -1,15 +1,12 @@
-/* src/components/LibroVentasConsumidor.css */
-
-/* Contenedor principal */
-.libro-ventas-consumidor-container {
+.libro-ventas-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Formulario */
-.libro-ventas-consumidor-form {
+.libro-ventas-form {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -18,15 +15,12 @@
     width: 100%;
 }
 
-.libro-ventas-consumidor-form input {
+.input-container {
     flex: 1 1 45%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
 }
 
-.libro-ventas-consumidor-button {
-    padding: 10px 20px;
+.libro-ventas-button {
+    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -36,28 +30,33 @@
     box-sizing: border-box;
 }
 
-.libro-ventas-consumidor-button:hover {
+.libro-ventas-button:hover {
     background-color: #45a049;
 }
 
-/* Tabla */
-.libro-ventas-consumidor-table {
+.libro-ventas-registros {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.libro-ventas-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.libro-ventas-consumidor-table th,
-.libro-ventas-consumidor-table td {
+.libro-ventas-table th,
+.libro-ventas-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    white-space: nowrap;
 }
 
-.libro-ventas-consumidor-table th {
+.libro-ventas-table th {
     background-color: #f2f2f2;
 }
 
-.libro-ventas-consumidor-delete-button {
+.libro-ventas-delete-button {
     background-color: #f44336;
     color: white;
     border: none;
@@ -66,35 +65,34 @@
     transition: background-color 0.3s;
 }
 
-.libro-ventas-consumidor-delete-button:hover {
+.libro-ventas-delete-button:hover {
     background-color: #da190b;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-    .libro-ventas-consumidor-form input {
+    .input-container {
         flex: 1 1 100%;
     }
 
-    .libro-ventas-consumidor-table,
-    .libro-ventas-consumidor-table tbody,
-    .libro-ventas-consumidor-table tr,
-    .libro-ventas-consumidor-table td {
+    .libro-ventas-table,
+    .libro-ventas-table tbody,
+    .libro-ventas-table tr,
+    .libro-ventas-table td {
         display: block;
         width: 100%;
     }
 
-    .libro-ventas-consumidor-table thead {
+    .libro-ventas-table thead {
         display: none;
     }
 
-    .libro-ventas-consumidor-table td {
+    .libro-ventas-table td {
         text-align: right;
         padding-left: 50%;
         position: relative;
     }
 
-    .libro-ventas-consumidor-table td::before {
+    .libro-ventas-table td::before {
         content: attr(data-label);
         position: absolute;
         left: 0;
@@ -103,23 +101,28 @@
         font-weight: bold;
         text-align: left;
     }
+
+    .libro-ventas-table td:last-child {
+        text-align: center;
+        padding-left: 0;
+    }
 }
 
 @media (max-width: 480px) {
-    .libro-ventas-consumidor-container {
+    .libro-ventas-container {
         padding: 10px;
     }
 
-    .libro-ventas-consumidor-form input {
+    .libro-ventas-form input {
         padding: 8px;
     }
 
-    .libro-ventas-consumidor-button {
+    .libro-ventas-button {
         padding: 8px 16px;
     }
 
-    .libro-ventas-consumidor-table th,
-    .libro-ventas-consumidor-table td {
+    .libro-ventas-table th,
+    .libro-ventas-table td {
         padding: 5px;
     }
 }

@@ -153,12 +153,15 @@ const LibroVentasConsumidor = () => {
                     ))}
                     <tr>
                         <td colSpan="5">Total</td>
-                        <td data-label="Ventas Exentas">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.ventasExentas || 0), 0).toFixed(2)}`}</td>
-                        <td data-label="Ventas No Sujetas">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.ventasNoSujetas || 0), 0).toFixed(2)}`}</td>
-                        <td data-label="Ventas Locales">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.ventasLocales || 0), 0).toFixed(2)}`}</td>
-                        <td data-label="Exportación">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.exportacion || 0), 0).toFixed(2)}`}</td>
-                        <td data-label="Total Ventas">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.totalVentas || 0), 0).toFixed(2)}`}</td>
-                        <td data-label="Ventas a Cuenta de Terceros">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.ventasTerceros || 0), 0).toFixed(2)}`}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.exentas || 0), 0).toFixed(2)}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.noSujetas || 0), 0).toFixed(2)}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.gravadasLocales || 0), 0).toFixed(2)}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.debitoFiscal || 0), 0).toFixed(2)}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.ventasTerceros || 0), 0).toFixed(2)}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.debitoTerceros || 0), 0).toFixed(2)}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.ivaPercibido || 0), 0).toFixed(2)}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.ivaRetenido || 0), 0).toFixed(2)}</td>
+                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.totalVentas || 0), 0).toFixed(2)}</td>
                         <td></td>
                     </tr>
                     </tbody>
