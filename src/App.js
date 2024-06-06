@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import DiarioMayor from './components/DiarioMayor';
-import Home from './components/Home';
+import Home from './web/Home';
 import LibroMayor from './components/LibroMayor';
 import LibroEstadosFinancieros from './components/LibroEstadosFinancieros';
 import RegistroAccionistas from './components/RegistroAccionistas';
@@ -12,6 +12,7 @@ import LibroCompras from "./components/LibroCompras";
 import LibroVentasContribuyente from './components/LibroVentasContribuyente'; // Importa el nuevo componente
 import LibroVentasConsumidor from "./components/LibroVentasConsumidor";
 import CapitalLibro from "./components/CapitalLibro";
+import './App.css';  // Importa el CSS global
 const App = () => {
     return (
         <Router>
