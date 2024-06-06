@@ -1,110 +1,102 @@
-// src/components/LibroCompras.js
-
 import React, { useState, useEffect } from 'react';
 import { addRegistroCompras, getRegistrosCompras, deleteRegistroCompras } from '../indexedDB';
 import './LibroCompras.css';
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from "react-router-dom";
+
+const inputs = [
+    { name: 'fechaEmision', placeholder: 'Fecha de Emisión', type: 'date' },
+    { name: 'numeroDocumento', placeholder: 'Número de Documento', type: 'text' },
+    { name: 'nrc', placeholder: 'NRC', type: 'text' },
+    { name: 'nitDui', placeholder: 'NIT o DUI', type: 'text' },
+    { name: 'nombreProveedor', placeholder: 'Nombre del Proveedor', type: 'text' },
+    { name: 'comprasExentasInternas', placeholder: 'Compras Exentas Internas', type: 'number' },
+    { name: 'comprasExentasInternacionales', placeholder: 'Compras Exentas Internacionales', type: 'number' },
+    { name: 'comprasExentasImportaciones', placeholder: 'Compras Exentas Importaciones', type: 'number' },
+    { name: 'comprasGravadasInternas', placeholder: 'Compras Gravadas Internas', type: 'number' },
+    { name: 'comprasGravadasInternacionales', placeholder: 'Compras Gravadas Internacionales', type: 'number' },
+    { name: 'comprasGravadasImportaciones', placeholder: 'Compras Gravadas Importaciones', type: 'number' },
+    { name: 'creditoFiscal', placeholder: 'Crédito Fiscal', type: 'number' },
+    { name: 'fovial', placeholder: 'FOVIAL', type: 'number' },
+    { name: 'cotrans', placeholder: 'COTRANS', type: 'number' },
+    { name: 'cesc', placeholder: 'CESC', type: 'number' },
+    { name: 'anticipoIva', placeholder: 'Anticipo IVA', type: 'number' },
+    { name: 'totalCompras', placeholder: 'Total Compras', type: 'number' },
+    { name: 'retencionTerceros', placeholder: 'Retención a Terceros', type: 'number' },
+    { name: 'comprasSujetosExcluidos', placeholder: 'Compras a Sujetos Excluidos', type: 'number' },
+];
 
 const LibroCompras = () => {
     const [registros, setRegistros] = useState([]);
-    const [nextId, setNextId] = useState(1); // ID incremental
-    const [fechaEmision, setFechaEmision] = useState('');
-    const [numeroDocumento, setNumeroDocumento] = useState('');
-    const [nrc, setNrc] = useState('');
-    const [nitDui, setNitDui] = useState('');
-    const [nombreProveedor, setNombreProveedor] = useState('');
-    const [comprasExentasInternas, setComprasExentasInternas] = useState('');
-    const [comprasExentasInternacionales, setComprasExentasInternacionales] = useState('');
-    const [comprasExentasImportaciones, setComprasExentasImportaciones] = useState('');
-    const [comprasGravadasInternas, setComprasGravadasInternas] = useState('');
-    const [comprasGravadasInternacionales, setComprasGravadasInternacionales] = useState('');
-    const [comprasGravadasImportaciones, setComprasGravadasImportaciones] = useState('');
-    const [fovial, setFovial] = useState('');
-    const [cotrans, setCotrans] = useState('');
-    const [cesc, setCesc] = useState('');
-    const [anticipoIva, setAnticipoIva] = useState('');
-    const [retencionTerceros, setRetencionTerceros] = useState('');
-    const [comprasSujetosExcluidos, setComprasSujetosExcluidos] = useState('');
+    const [nuevoRegistro, setNuevoRegistro] = useState({
+        fechaEmision: '',
+        numeroDocumento: '',
+        nrc: '',
+        nitDui: '',
+        nombreProveedor: '',
+        comprasExentasInternas: '',
+        comprasExentasInternacionales: '',
+        comprasExentasImportaciones: '',
+        comprasGravadasInternas: '',
+        comprasGravadasInternacionales: '',
+        comprasGravadasImportaciones: '',
+        creditoFiscal: '',
+        fovial: '',
+        cotrans: '',
+        cesc: '',
+        anticipoIva: '',
+        totalCompras: '',
+        retencionTerceros: '',
+        comprasSujetosExcluidos: '',
+    });
 
     useEffect(() => {
         const fetchData = async () => {
             const data = await getRegistrosCompras();
-            const ordenados = Array.isArray(data) ? data.sort((a, b) => a.asiento - b.asiento) : [];
-            setRegistros(ordenados);
-            setNextId(ordenados.length + 1);
+            setRegistros(data);
         };
 
         fetchData();
     }, []);
-    const handleSubmit = async (event) => {
-        event.preventDefault();
 
-        const newRegistro = {
-            id: uuidv4(),
-            asiento: String(nextId).padStart(4, '0'),
-            fechaEmision,
-            numeroDocumento,
-            nrc,
-            nitDui,
-            nombreProveedor,
-            comprasExentasInternas: parseFloat(comprasExentasInternas) || 0,
-            comprasExentasInternacionales: parseFloat(comprasExentasInternacionales) || 0,
-            comprasExentasImportaciones: parseFloat(comprasExentasImportaciones) || 0,
-            comprasGravadasInternas: parseFloat(comprasGravadasInternas) || 0,
-            comprasGravadasInternacionales: parseFloat(comprasGravadasInternacionales) || 0,
-            comprasGravadasImportaciones: parseFloat(comprasGravadasImportaciones) || 0,
-            creditoFiscal: ((parseFloat(comprasGravadasInternas) || 0) + (parseFloat(comprasGravadasInternacionales) || 0) + (parseFloat(comprasGravadasImportaciones) || 0)) * 0.13,
-            fovial: parseFloat(fovial) || 0,
-            cotrans: parseFloat(cotrans) || 0,
-            cesc: parseFloat(cesc) || 0,
-            anticipoIva: parseFloat(anticipoIva) || 0,
-            totalCompras: (
-                (parseFloat(comprasExentasInternas) || 0) +
-                (parseFloat(comprasExentasInternacionales) || 0) +
-                (parseFloat(comprasExentasImportaciones) || 0) +
-                (parseFloat(comprasGravadasInternas) || 0) +
-                (parseFloat(comprasGravadasInternacionales) || 0) +
-                (parseFloat(comprasGravadasImportaciones) || 0) +
-                ((parseFloat(comprasGravadasInternas) || 0) + (parseFloat(comprasGravadasInternacionales) || 0) + (parseFloat(comprasGravadasImportaciones) || 0)) * 0.13
-            ),
-            retencionTerceros: parseFloat(retencionTerceros) || 0,
-            comprasSujetosExcluidos: parseFloat(comprasSujetosExcluidos) || 0
-        };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNuevoRegistro((prev) => ({ ...prev, [name]: value }));
+    };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            await addRegistroCompras(newRegistro);
-            setRegistros([...registros, newRegistro]);
-            setNextId(nextId + 1);
-            setFechaEmision('');
-            setNumeroDocumento('');
-            setNrc('');
-            setNitDui('');
-            setNombreProveedor('');
-            setComprasExentasInternas('');
-            setComprasExentasInternacionales('');
-            setComprasExentasImportaciones('');
-            setComprasGravadasInternas('');
-            setComprasGravadasInternacionales('');
-            setComprasGravadasImportaciones('');
-            setFovial('');
-            setCotrans('');
-            setCesc('');
-            setAnticipoIva('');
-            setRetencionTerceros('');
-            setComprasSujetosExcluidos('');
-            event.target.reset();
+            await addRegistroCompras(nuevoRegistro);
+            setRegistros((prev) => [...prev, nuevoRegistro]);
+            setNuevoRegistro({
+                fechaEmision: '',
+                numeroDocumento: '',
+                nrc: '',
+                nitDui: '',
+                nombreProveedor: '',
+                comprasExentasInternas: '',
+                comprasExentasInternacionales: '',
+                comprasExentasImportaciones: '',
+                comprasGravadasInternas: '',
+                comprasGravadasInternacionales: '',
+                comprasGravadasImportaciones: '',
+                creditoFiscal: '',
+                fovial: '',
+                cotrans: '',
+                cesc: '',
+                anticipoIva: '',
+                totalCompras: '',
+                retencionTerceros: '',
+                comprasSujetosExcluidos: '',
+            });
         } catch (error) {
             console.error('Error al agregar el registro:', error);
         }
     };
-    const handleDelete = async (index) => {
-        const newRegistros = [...registros];
-        const registroEliminado = newRegistros.splice(index, 1)[0];
 
+    const handleDelete = async (id) => {
         try {
-            await deleteRegistroCompras(registroEliminado.id);
-            setRegistros(newRegistros);
+            await deleteRegistroCompras(id);
+            setRegistros((prev) => prev.filter((registro) => registro.id !== id));
         } catch (error) {
             console.error('Error al eliminar el registro:', error);
         }
@@ -114,56 +106,77 @@ const LibroCompras = () => {
         <div className="libro-compras-container">
             <h1>Libro de Compras</h1>
             <form className="libro-compras-form" onSubmit={handleSubmit}>
-                <input type="date" name="fechaEmision" value={fechaEmision} onChange={(e) => setFechaEmision(e.target.value)} required placeholder="Fecha de Emisión"/>
-                <input type="text" name="numeroDocumento" value={numeroDocumento} onChange={(e) => setNumeroDocumento(e.target.value)} required placeholder="Número de Documento"/>
-                <input type="text" name="nrc" value={nrc} onChange={(e) => setNrc(e.target.value)} required placeholder="NRC"/>
-                <input type="text" name="nitDui" value={nitDui} onChange={(e) => setNitDui(e.target.value)} required placeholder="NIT o DUI de Sujeto Excluido"/>
-                <input type="text" name="nombreProveedor" value={nombreProveedor} onChange={(e) => setNombreProveedor(e.target.value)} required placeholder="Nombre del Proveedor"/>
-                <input type="number" name="comprasExentasInternas" value={comprasExentasInternas} onChange={(e) => setComprasExentasInternas(e.target.value)} placeholder="Compras Exentas Internas"/>
-                <input type="number" name="comprasExentasInternacionales" value={comprasExentasInternacionales} onChange={(e) => setComprasExentasInternacionales(e.target.value)} placeholder="Compras Exentas Internacionales"/>
-                <input type="number" name="comprasExentasImportaciones" value={comprasExentasImportaciones} onChange={(e) => setComprasExentasImportaciones(e.target.value)} placeholder="Compras Exentas Importaciones"/>
-                <input type="number" name="comprasGravadasInternas" value={comprasGravadasInternas} onChange={(e) => setComprasGravadasInternas(e.target.value)} placeholder="Compras Gravadas Internas"/>
-                <input type="number" name="comprasGravadasInternacionales" value={comprasGravadasInternacionales} onChange={(e) => setComprasGravadasInternacionales(e.target.value)} placeholder="Compras Gravadas Internacionales"/>
-                <input type="number" name="comprasGravadasImportaciones" value={comprasGravadasImportaciones} onChange={(e) => setComprasGravadasImportaciones(e.target.value)} placeholder="Compras Gravadas Importaciones"/>
-                <input type="number" name="fovial" value={fovial} onChange={(e) => setFovial(e.target.value)} placeholder="FOVIAL"/>
-                <input type="number" name="cotrans" value={cotrans} onChange={(e) => setCotrans(e.target.value)} placeholder="COTRANS"/>
-                <input type="number" name="cesc" value={cesc} onChange={(e) => setCesc(e.target.value)} placeholder="CESC"/>
-                <input type="number" name="anticipoIva" value={anticipoIva} onChange={(e) => setAnticipoIva(e.target.value)} placeholder="Anticipo IVA"/>
-                <input type="number" name="retencionTerceros" value={retencionTerceros} onChange={(e) => setRetencionTerceros(e.target.value)} placeholder="Retención a Terceros"/>
-                <input type="number" name="comprasSujetosExcluidos" value={comprasSujetosExcluidos} onChange={(e) => setComprasSujetosExcluidos(e.target.value)} placeholder="Compras a Sujetos Excluidos"/>
-                <button type="submit" className="libro-compras-button">Agregar Registro</button>
-            </form>
-            <div className="libro-compras-cards">
-                {registros.map((registro, index) => (
-                    <div key={registro.id} className="libro-compras-card">
-                        <table className="libro-compras-table">
-                            <tbody>
-                                <tr><td>Fecha de Emisión:</td><td>{registro.fechaEmision}</td></tr>
-                                <tr><td>Número de Documento:</td><td>{registro.numeroDocumento}</td></tr>
-                                <tr><td>NRC:</td><td>{registro.nrc}</td></tr>
-                                <tr><td>NIT o DUI:</td><td>{registro.nitDui}</td></tr>
-                                <tr><td>Nombre del Proveedor:</td><td>{registro.nombreProveedor}</td></tr>
-                                <tr><td>Compras Exentas Internas:</td><td>{registro.comprasExentasInternas}</td></tr>
-                                <tr><td>Compras Exentas Internacionales:</td><td>{registro.comprasExentasInternacionales}</td></tr>
-                                <tr><td>Compras Exentas Importaciones:</td><td>{registro.comprasExentasImportaciones}</td></tr>
-                                <tr><td>Compras Gravadas Internas:</td><td>{registro.comprasGravadasInternas}</td></tr>
-                                <tr><td>Compras Gravadas Internacionales:</td><td>{registro.comprasGravadasInternacionales}</td></tr>
-                                <tr><td>Compras Gravadas Importaciones:</td><td>{registro.comprasGravadasImportaciones}</td></tr>
-                                <tr><td>Crédito Fiscal:</td><td>{registro.creditoFiscal.toFixed(2)}</td></tr>
-                                <tr><td>FOVIAL:</td><td>{registro.fovial}</td></tr>
-                                <tr><td>COTRANS:</td><td>{registro.cotrans}</td></tr>
-                                <tr><td>CESC:</td><td>{registro.cesc}</td></tr>
-                                <tr><td>Anticipo IVA:</td><td>{registro.anticipoIva}</td></tr>
-                                <tr><td>Retención a Terceros:</td><td>{registro.retencionTerceros}</td></tr>
-                                <tr><td>Total Compras:</td><td>{registro.totalCompras.toFixed(2)}</td></tr>
-                                <tr><td>Compras a Sujetos Excluidos:</td><td>{registro.comprasSujetosExcluidos}</td></tr>
-                            </tbody>
-                        </table>
-                        <button onClick={() => handleDelete(index)} className="libro-compras-delete-button">
-                            Eliminar
-                        </button>
+                {inputs.map((input) => (
+                    <div className="input-container" key={input.name}>
+                        <input
+                            type={input.type}
+                            name={input.name}
+                            value={nuevoRegistro[input.name]}
+                            onChange={handleInputChange}
+                            placeholder={input.placeholder}
+                            required
+                        />
                     </div>
                 ))}
+                <button type="submit" className="libro-compras-button">Agregar Registro</button>
+            </form>
+            <div className="libro-compras-card">
+                <table className="libro-compras-table">
+                    <thead>
+                    <tr>
+                        <th>Fecha de Emisión</th>
+                        <th>Número de Documento</th>
+                        <th>NRC</th>
+                        <th>NIT o DUI</th>
+                        <th>Nombre del Proveedor</th>
+                        <th>Compras Exentas Internas</th>
+                        <th>Compras Exentas Internacionales</th>
+                        <th>Compras Exentas Importaciones</th>
+                        <th>Compras Gravadas Internas</th>
+                        <th>Compras Gravadas Internacionales</th>
+                        <th>Compras Gravadas Importaciones</th>
+                        <th>Crédito Fiscal</th>
+                        <th>FOVIAL</th>
+                        <th>COTRANS</th>
+                        <th>CESC</th>
+                        <th>Anticipo IVA</th>
+                        <th>Total Compras</th>
+                        <th>Retención a Terceros</th>
+                        <th>Compras a Sujetos Excluidos</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {registros.map((registro, index) => (
+                        <tr key={registro.id}>
+                            <td data-label="Fecha de Emisión">{registro.fechaEmision}</td>
+                            <td data-label="Número de Documento">{registro.numeroDocumento}</td>
+                            <td data-label="NRC">{registro.nrc}</td>
+                            <td data-label="NIT o DUI">{registro.nitDui}</td>
+                            <td data-label="Nombre del Proveedor">{registro.nombreProveedor}</td>
+                            <td data-label="Compras Exentas Internas">{`$${registro.comprasExentasInternas}`}</td>
+                            <td data-label="Compras Exentas Internacionales">{`$${registro.comprasExentasInternacionales}`}</td>
+                            <td data-label="Compras Exentas Importaciones">{`$${registro.comprasExentasImportaciones}`}</td>
+                            <td data-label="Compras Gravadas Internas">{`$${registro.comprasGravadasInternas}`}</td>
+                            <td data-label="Compras Gravadas Internacionales">{`$${registro.comprasGravadasInternacionales}`}</td>
+                            <td data-label="Compras Gravadas Importaciones">{`$${registro.comprasGravadasImportaciones}`}</td>
+                            <td data-label="Crédito Fiscal">{`$${registro.creditoFiscal}`}</td>
+                            <td data-label="FOVIAL">{`$${registro.fovial}`}</td>
+                            <td data-label="COTRANS">{`$${registro.cotrans}`}</td>
+                            <td data-label="CESC">{`$${registro.cesc}`}</td>
+                            <td data-label="Anticipo IVA">{`$${registro.anticipoIva}`}</td>
+                            <td data-label="Total Compras">{`$${registro.totalCompras}`}</td>
+                            <td data-label="Retención a Terceros">{`$${registro.retencionTerceros}`}</td>
+                            <td data-label="Compras a Sujetos Excluidos">{`$${registro.comprasSujetosExcluidos}`}</td>
+                            <td>
+                                <button onClick={() => handleDelete(registro.id)} className="libro-compras-delete-button">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

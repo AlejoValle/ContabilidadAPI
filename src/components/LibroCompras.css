@@ -1,6 +1,4 @@
-/* src/components/LibroCompras.css */
-
-/* Contenedor principal del libro de compras */
+/* Contenedor principal */
 .libro-compras-container {
     display: flex;
     flex-direction: column;
@@ -18,8 +16,7 @@
     width: 100%;
 }
 
-.libro-compras-form input,
-.libro-compras-form button {
+.libro-compras-form input {
     flex: 1 1 45%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -27,12 +24,14 @@
 }
 
 .libro-compras-button {
+    padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .libro-compras-button:hover {
@@ -55,7 +54,7 @@
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1200px;
+    max-width: 1200px; /* Ajusta según sea necesario */
     box-sizing: border-box;
 }
 

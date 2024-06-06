@@ -11,7 +11,7 @@ import ActaJuntaAccionistas from "./components/ActaJuntaAccionistas";
 import LibroCompras from "./components/LibroCompras";
 import LibroVentasContribuyente from './components/LibroVentasContribuyente'; // Importa el nuevo componente
 import LibroVentasConsumidor from "./components/LibroVentasConsumidor";
-
+import CapitalLibro from "./components/CapitalLibro";
 const App = () => {
     return (
         <Router>
@@ -26,6 +26,7 @@ const App = () => {
                 <Route path="/LibroCompras" element={<LibroCompras />} />
                 <Route path="/LibroVentasContribuyente" element={<LibroVentasContribuyente />} /> {/* Agrega la nueva ruta */}
                 <Route path="/LibroVentasConsumidor" element={<LibroVentasConsumidor />} />
+                <Route path="/CapitalLibro" element={<CapitalLibro />} />
             </Routes>
         </Router>
     );
