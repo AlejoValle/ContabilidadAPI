@@ -1,3 +1,5 @@
+/* src/components/LibroVentasContribuyente.css */
+
 /* Contenedor principal */
 .libro-ventas-container {
     display: flex;
@@ -16,15 +18,10 @@
     width: 100%;
 }
 
-.libro-ventas-form .input-container {
+.libro-ventas-form input {
     flex: 1 1 45%;
-}
-
-.libro-ventas-form input,
-.libro-ventas-form select {
     padding: 10px;
     border: 1px solid #ddd;
-    width: 100%;
     box-sizing: border-box;
 }
 
@@ -43,11 +40,16 @@
     background-color: #45a049;
 }
 
-/* Tabla de registros */
+/* Tarjetas de registro */
 .libro-ventas-registros {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
     width: 100%;
 }
 
+/* Tabla */
 .libro-ventas-table {
     width: 100%;
     border-collapse: collapse;
@@ -80,7 +82,7 @@
 
 /* Media queries para diseño responsive */
 @media (max-width: 768px) {
-    .libro-ventas-form .input-container {
+    .libro-ventas-form input {
         flex: 1 1 100%;
     }
 

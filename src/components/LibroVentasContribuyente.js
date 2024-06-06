@@ -148,20 +148,20 @@ const LibroVentasContribuyente = () => {
                     <tbody>
                     {registros.map((registro, index) => (
                         <tr key={registro.id}>
-                            <td>{index + 1}</td>
-                            <td>{registro.fecha}</td>
-                            <td>{registro.numeroDocumento}</td>
-                            <td>{registro.nrc}</td>
-                            <td>{registro.nombreContribuyente}</td>
-                            <td>${registro.exentas}</td>
-                            <td>${registro.noSujetas}</td>
-                            <td>${registro.gravadasLocales}</td>
-                            <td>${registro.debitoFiscal}</td>
-                            <td>${registro.ventasTerceros}</td>
-                            <td>${registro.debitoTerceros}</td>
-                            <td>${registro.ivaPercibido}</td>
-                            <td>${registro.ivaRetenido}</td>
-                            <td>${registro.totalVentas}</td>
+                            <td data-label="No.">{index + 1}</td>
+                            <td data-label="Fecha Emisión">{registro.fecha}</td>
+                            <td data-label="Número Documento">{registro.numeroDocumento}</td>
+                            <td data-label="NRC">{registro.nrc}</td>
+                            <td data-label="Nombre del Contribuyente">{registro.nombreContribuyente}</td>
+                            <td data-label="Exentas">{`$${registro.exentas}`}</td>
+                            <td data-label="No Sujetas">{`$${registro.noSujetas}`}</td>
+                            <td data-label="Gravadas Locales">{`$${registro.gravadasLocales}`}</td>
+                            <td data-label="Débito Fiscal">{`$${registro.debitoFiscal}`}</td>
+                            <td data-label="Ventas a Cuenta de Terceros">{`$${registro.ventasTerceros}`}</td>
+                            <td data-label="Débito F. a Cta. de Terceros">{`$${registro.debitoTerceros}`}</td>
+                            <td data-label="IVA Percibido">{`$${registro.ivaPercibido}`}</td>
+                            <td data-label="IVA Retenido">{`$${registro.ivaRetenido}`}</td>
+                            <td data-label="Total Ventas">{`$${registro.totalVentas}`}</td>
                             <td>
                                 <button
                                     onClick={() => handleDelete(registro.id)}
@@ -174,15 +174,15 @@ const LibroVentasContribuyente = () => {
                     ))}
                     <tr>
                         <td colSpan="5">Total</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.exentas || 0), 0).toFixed(2)}</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.noSujetas || 0), 0).toFixed(2)}</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.gravadasLocales || 0), 0).toFixed(2)}</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.debitoFiscal || 0), 0).toFixed(2)}</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.ventasTerceros || 0), 0).toFixed(2)}</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.debitoTerceros || 0), 0).toFixed(2)}</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.ivaPercibido || 0), 0).toFixed(2)}</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.ivaRetenido || 0), 0).toFixed(2)}</td>
-                        <td>${registros.reduce((sum, reg) => sum + parseFloat(reg.totalVentas || 0), 0).toFixed(2)}</td>
+                        <td data-label="Exentas">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.exentas || 0), 0).toFixed(2)}`}</td>
+                        <td data-label="No Sujetas">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.noSujetas || 0), 0).toFixed(2)}`}</td>
+                        <td data-label="Gravadas Locales">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.gravadasLocales || 0), 0).toFixed(2)}`}</td>
+                        <td data-label="Débito Fiscal">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.debitoFiscal || 0), 0).toFixed(2)}`}</td>
+                        <td data-label="Ventas a Cuenta de Terceros">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.ventasTerceros || 0), 0).toFixed(2)}`}</td>
+                        <td data-label="Débito F. a Cta. de Terceros">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.debitoTerceros || 0), 0).toFixed(2)}`}</td>
+                        <td data-label="IVA Percibido">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.ivaPercibido || 0), 0).toFixed(2)}`}</td>
+                        <td data-label="IVA Retenido">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.ivaRetenido || 0), 0).toFixed(2)}`}</td>
+                        <td data-label="Total Ventas">{`$${registros.reduce((sum, reg) => sum + parseFloat(reg.totalVentas || 0), 0).toFixed(2)}`}</td>
                         <td></td>
                     </tr>
                     </tbody>
@@ -193,3 +193,5 @@ const LibroVentasContribuyente = () => {
 };
 
 export default LibroVentasContribuyente;
+
+
