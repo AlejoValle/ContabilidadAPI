@@ -60,42 +60,44 @@ const LibroMayor = () => {
             {libroMayor.map((registro) => (
                 <div key={registro.codigo} className="libro-mayor-card">
                     <h2>{registro.desglose}</h2>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Fecha</th>
-                            <th>Desglose</th>
-                            <th>Debe</th>
-                            <th>Haber</th>
-                            <th>Saldo</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {registro.registros.map((reg, index) => (
-                            <tr key={index}>
-                                <td>{registro.codigo}</td>
-                                <td>{reg.fecha}</td>
-                                <td>{reg.desglose}</td>
-                                <td>${reg.debe > 0 ? reg.debe.toFixed(2) : ''}</td> {/* Agregar el signo de dólar */}
-                                <td>${reg.haber > 0 ? reg.haber.toFixed(2) : ''}</td> {/* Agregar el signo de dólar */}
-                                <td>${Math.abs(reg.debe - reg.haber).toFixed(2)}</td> {/* Agregar el signo de dólar */}
+                    <div className="libro-mayor-table-container">
+                        <table className="libro-mayor-table">
+                            <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Fecha</th>
+                                <th>Desglose</th>
+                                <th>Debe</th>
+                                <th>Haber</th>
+                                <th>Saldo</th>
                             </tr>
-                        ))}
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colSpan="3">Totales</td>
-                            <td>${registro.debe.toFixed(2)}</td> {/* Agregar el signo de dólar */}
-                            <td>${registro.haber.toFixed(2)}</td> {/* Agregar el signo de dólar */}
-                            <td>${Math.abs(registro.saldo).toFixed(2)}</td> {/* Agregar el signo de dólar */}
-                        </tr>
-                        </tfoot>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {registro.registros.map((reg, index) => (
+                                <tr key={index}>
+                                    <td>{registro.codigo}</td>
+                                    <td>{reg.fecha}</td>
+                                    <td>{reg.desglose}</td>
+                                    <td>${reg.debe > 0 ? reg.debe.toFixed(2) : ''}</td>
+                                    <td>${reg.haber > 0 ? reg.haber.toFixed(2) : ''}</td>
+                                    <td>${Math.abs(reg.debe - reg.haber).toFixed(2)}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colSpan="3">Totales</td>
+                                <td>${registro.debe.toFixed(2)}</td>
+                                <td>${registro.haber.toFixed(2)}</td>
+                                <td>${Math.abs(registro.saldo).toFixed(2)}</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             ))}
             <button onClick={handlediario} className="return-button">
-                return
+                Return
             </button>
         </div>
     );

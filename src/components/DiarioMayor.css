@@ -34,11 +34,29 @@
 .diario-button {
     flex: 1 1 100%;
     margin-top: 10px;
+    padding: 10px;
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.diario-button:hover {
+    background-color: #45a049; /* Verde oscuro */
 }
 
 .diario-delete-button {
     padding: 5px 10px;
+    background-color: #f44336; /* Rojo */
+    color: white;
+    border: none;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.diario-delete-button:hover {
+    background-color: #da190b; /* Rojo oscuro */
 }
 
 /* Estilos para la tabla del diario */
@@ -102,4 +120,3 @@
         font-size: 11px;
     }
 }
-

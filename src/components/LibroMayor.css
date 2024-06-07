@@ -1,13 +1,6 @@
-.return-button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%; /* Hace que el botón tenga el mismo ancho que los inputs */
-    box-sizing: border-box;
-}
+/* src/components/LibroMayor.css */
+
+/* Contenedor principal del libro mayor */
 .libro-mayor-container {
     display: flex;
     flex-direction: column;
@@ -15,27 +8,70 @@
     padding: 20px;
 }
 
+/* Estilo de las tarjetas */
 .libro-mayor-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 800px;
     margin-bottom: 20px;
-    border: 1px solid #ddd;
-    padding: 10px;
     box-sizing: border-box;
 }
 
-.libro-mayor-card table {
-    width: 100%;
-    border-collapse: collapse;
+/* Contenedor de la tabla */
+.libro-mayor-table-container {
+    overflow-x: auto;
 }
 
-.libro-mayor-card th,
-.libro-mayor-card td {
+/* Estilo de las tablas */
+.libro-mayor-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+.libro-mayor-table th,
+.libro-mayor-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.libro-mayor-card th {
+.libro-mayor-table th {
     background-color: #f2f2f2;
+}
+
+.return-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box;
+}
+
+.return-button:hover {
+    background-color: #45a049;
+}
+
+/* Media queries para diseño responsive */
+@media (max-width: 768px) {
+    .libro-mayor-card {
+        width: 100%;
+    }
+
+    .libro-mayor-table-container {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 420px) {
+    .libro-mayor-table th,
+    .libro-mayor-table td {
+        white-space: nowrap;
+    }
 }

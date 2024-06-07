@@ -132,7 +132,7 @@ const DiarioMayor = () => {
                             onChange={handleDesgloseChange}
                             fullWidth
                             required
-                            SelectProps={{ native: true }}
+                            SelectProps={{native: true}}
                         >
                             <option value="">Desglose</option>
                             <option value="caja">Caja</option>
@@ -149,7 +149,7 @@ const DiarioMayor = () => {
                             name="definicion"
                             fullWidth
                             required
-                            SelectProps={{ native: true }}
+                            SelectProps={{native: true}}
                         >
                             <option value="">Definición</option>
                             <option value="activo+">Activo+</option>
@@ -179,12 +179,8 @@ const DiarioMayor = () => {
                             pattern="^\d+(\.\d{1,2})?$"
                             fullWidth
                         />
-                        <Button type="submit" variant="contained" color="primary" className="diario-button">
-                            Agregar Registro
-                        </Button>
-                        <Button onClick={handleMayorizar} variant="contained" color="secondary" className="diario-button">
-                            Mayorizar
-                        </Button>
+                        <button type="submit" className="diario-button">Agregar Registro</button>
+                        <button type="button" onClick={handleMayorizar} className="diario-button">Mayorizar</button>
                     </form>
                 </CardContent>
             </Card>
@@ -215,9 +211,10 @@ const DiarioMayor = () => {
                                         <TableCell>{registro.debe && `$${parseFloat(registro.debe).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</TableCell>
                                         <TableCell>{registro.haber && `$${parseFloat(registro.haber).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</TableCell>
                                         <TableCell>
-                                            <Button onClick={() => handleDelete(index)} variant="contained" color="secondary" className="diario-delete-button">
+                                            <button onClick={() => handleDelete(index)}
+                                                    className="diario-delete-button">
                                                 Eliminar
-                                            </Button>
+                                            </button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
