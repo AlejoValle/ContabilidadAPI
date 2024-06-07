@@ -1,9 +1,9 @@
-//Diariomayor.js
 import React, { useState, useEffect } from 'react';
 import { addRegistro, getRegistros, deleteRegistro } from '../indexedDB';
-import './DiarioMayor.css';
 import { v4 as uuidv4 } from 'uuid';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import './DiarioMayor.css';
 
 const DiarioMayor = () => {
     const [registros, setRegistros] = useState([]);
@@ -23,7 +23,6 @@ const DiarioMayor = () => {
 
         fetchData();
     }, []);
-
 
     const handleDebeChange = (event) => {
         setDebe(event.target.value);
@@ -114,73 +113,119 @@ const DiarioMayor = () => {
             console.error('Error al eliminar el registro:', error);
         }
     };
+
     const handleMayorizar = () => {
         navigate('/LibroMayor'); // Redirigir al componente LibroMayor
     };
+
     return (
         <div className="diario-container">
             <h1>Diario Mayor</h1>
-            <form className="diario-form" onSubmit={handleSubmit}>
-                <select name="desglose" value={desglose} onChange={handleDesgloseChange} required>
-                    <option value="">Desglose</option>
-                    <option value="caja">caja</option>
-                    <option value="ventas">ventas</option>
-                    <option value="mercaderia">mercaderia</option>
-                    <option value="proveedores">proveedores</option>
-                    <option value="rodados">rodados</option>
-                    <option value="pagare a pagar">pagare a pagar</option>
-                    <option value="alquileres perdidos">alquileres perdidos</option>
-                </select>
-                <select name="definicion" required>
-                    <option value="">Definición</option>
-                    <option value="activo+">activo+</option>
-                    <option value="activo-">activo-</option>
-                    <option value="pasivo+">pasivo+</option>
-                    <option value="pasivo-">pasivo-</option>
-                    <option value="r+">r+</option>
-                    <option value="r-">r-</option>
-                </select>
-                <input type="text" name="debe" value={debe} onChange={handleDebeChange} placeholder="Debe"
-                       pattern="^\d+(\.\d{1,2})?$"/>
-                <input type="text" name="haber" value={haber} onChange={handleHaberChange} placeholder="Haber"
-                       pattern="^\d+(\.\d{1,2})?$"/>
-                <button type="submit" className="diario-button">Agregar Registro</button>
-                <button onClick={handleMayorizar} className="diario-button">
-                    Mayorizar
-                </button>
-            </form>
-            <table className="diario-table">
-                <thead>
-                <tr>
-                    <th>Asiento</th>
-                    <th>Fecha</th>
-                    <th>Definición</th>
-                    <th>Código</th>
-                    <th>Desglose</th>
-                    <th>Debe</th>
-                    <th>Haber</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                {registros.map((registro, index) => (
-                    <tr key={registro.id}>
-                        <td>{registro.asiento}</td>
-                        <td>{registro.fecha}</td>
-                        <td>{registro.definicion}</td>
-                        <td>{registro.codigo}</td>
-                        <td>{registro.desglose}</td>
-                        <td>{registro.debe && `$${parseFloat(registro.debe).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</td>
-                        <td>{registro.haber && `$${parseFloat(registro.haber).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</td>
-                        <td>
-                            <button onClick={() => handleDelete(index)} className="diario-delete-button">
-                                Eliminar
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+            <Card className="diario-card">
+                <CardContent>
+                    <form className="diario-form" onSubmit={handleSubmit}>
+                        <TextField
+                            select
+                            label="Desglose"
+                            name="desglose"
+                            value={desglose}
+                            onChange={handleDesgloseChange}
+                            fullWidth
+                            required
+                            SelectProps={{ native: true }}
+                        >
+                            <option value="">Desglose</option>
+                            <option value="caja">Caja</option>
+                            <option value="ventas">Ventas</option>
+                            <option value="mercaderia">Mercadería</option>
+                            <option value="proveedores">Proveedores</option>
+                            <option value="rodados">Rodados</option>
+                            <option value="pagare a pagar">Pagaré a pagar</option>
+                            <option value="alquileres perdidos">Alquileres perdidos</option>
+                        </TextField>
+                        <TextField
+                            select
+                            label="Definición"
+                            name="definicion"
+                            fullWidth
+                            required
+                            SelectProps={{ native: true }}
+                        >
+                            <option value="">Definición</option>
+                            <option value="activo+">Activo+</option>
+                            <option value="activo-">Activo-</option>
+                            <option value="pasivo+">Pasivo+</option>
+                            <option value="pasivo-">Pasivo-</option>
+                            <option value="r+">R+</option>
+                            <option value="r-">R-</option>
+                        </TextField>
+                        <TextField
+                            type="text"
+                            label="Debe"
+                            name="debe"
+                            value={debe}
+                            onChange={handleDebeChange}
+                            placeholder="Debe"
+                            pattern="^\d+(\.\d{1,2})?$"
+                            fullWidth
+                        />
+                        <TextField
+                            type="text"
+                            label="Haber"
+                            name="haber"
+                            value={haber}
+                            onChange={handleHaberChange}
+                            placeholder="Haber"
+                            pattern="^\d+(\.\d{1,2})?$"
+                            fullWidth
+                        />
+                        <Button type="submit" variant="contained" color="primary" className="diario-button">
+                            Agregar Registro
+                        </Button>
+                        <Button onClick={handleMayorizar} variant="contained" color="secondary" className="diario-button">
+                            Mayorizar
+                        </Button>
+                    </form>
+                </CardContent>
+            </Card>
+            <Card className="diario-card">
+                <CardContent>
+                    <TableContainer component={Paper}>
+                        <Table className="diario-table" aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Asiento</TableCell>
+                                    <TableCell>Fecha</TableCell>
+                                    <TableCell>Definición</TableCell>
+                                    <TableCell>Código</TableCell>
+                                    <TableCell>Desglose</TableCell>
+                                    <TableCell>Debe</TableCell>
+                                    <TableCell>Haber</TableCell>
+                                    <TableCell>Acciones</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {registros.map((registro, index) => (
+                                    <TableRow key={registro.id}>
+                                        <TableCell>{registro.asiento}</TableCell>
+                                        <TableCell>{registro.fecha}</TableCell>
+                                        <TableCell>{registro.definicion}</TableCell>
+                                        <TableCell>{registro.codigo}</TableCell>
+                                        <TableCell>{registro.desglose}</TableCell>
+                                        <TableCell>{registro.debe && `$${parseFloat(registro.debe).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</TableCell>
+                                        <TableCell>{registro.haber && `$${parseFloat(registro.haber).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</TableCell>
+                                        <TableCell>
+                                            <Button onClick={() => handleDelete(index)} variant="contained" color="secondary" className="diario-delete-button">
+                                                Eliminar
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </CardContent>
+            </Card>
         </div>
     );
 };

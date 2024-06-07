@@ -11,12 +11,45 @@
     box-sizing: border-box;
 }
 
-/* Estilos para la tabla del diario */
-.diario-table {
-    width: 80%; /* Ajusta el ancho según tus necesidades */
-    max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
-    border-collapse: collapse;
+/* Estilos para las cards del diario */
+.diario-card {
+    width: 100%;
+    max-width: 800px;
     margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.diario-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.diario-form > * {
+    flex: 1 1 100%;
+}
+
+.diario-button {
+    flex: 1 1 100%;
+    margin-top: 10px;
+}
+
+.diario-delete-button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Estilos para la tabla del diario */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.diario-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .diario-table th,
@@ -30,46 +63,43 @@
     background-color: #f2f2f2;
 }
 
-/* Estilos para el formulario del diario */
-.diario-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-.diario-form input {
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    width: 100%;
-    box-sizing: border-box;
+/* Estilos responsive */
+@media (max-width: 768px) {
+    .diario-form {
+        flex-direction: column;
+    }
+
+    .diario-table th,
+    .diario-table td {
+        white-space: nowrap;
+    }
+
+    .diario-table th,
+    .diario-table td {
+        padding: 6px;
+    }
+
+    .diario-table th {
+        font-size: 14px;
+    }
+
+    .diario-table td {
+        font-size: 13px;
+    }
 }
 
-/* Botón para agregar registros */
-.diario-button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%; /* Hace que el botón tenga el mismo ancho que los inputs */
-    box-sizing: border-box;
+@media (max-width: 480px) {
+    .diario-table th,
+    .diario-table td {
+        padding: 4px;
+    }
+
+    .diario-table th {
+        font-size: 12px;
+    }
+
+    .diario-table td {
+        font-size: 11px;
+    }
 }
 
-.diario-button:hover {
-    background-color: #45a049;
-}
-
-/* Botón para eliminar registros */
-.diario-delete-button {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.diario-delete-button:hover {
-    background-color: #da190b;
-}
