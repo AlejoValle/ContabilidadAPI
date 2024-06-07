@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Typography, Box, Button, Grid, Card, CardContent } from '@mui/material';
+import { Container, Typography, Box, Button, Grid, Card, CardContent, AppBar, Toolbar } from '@mui/material';
 import { AccessTime, Description, VerifiedUser } from '@mui/icons-material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // Lista de formatos con nombres y rutas de archivo
 const formats = [
@@ -24,106 +25,160 @@ const formats = [
     { name: 'Declaraciones de Pago a Cuenta e ISR', file: 'Formulario de autorización de correlativos (F-940)..docx' },
 ];
 
+// Crear un tema personalizado
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#8B4513', // Marrón
+        },
+        secondary: {
+            main: '#F5F5DC', // Beige
+        },
+        background: {
+            default: '#F5F5DC', // Fondo Beige
+            paper: '#FFFFFF', // Fondo de los elementos
+        },
+        text: {
+            primary: '#8B4513', // Texto Marrón
+            secondary: '#D3D3D3', // Texto Gris claro
+        },
+    },
+    typography: {
+        fontFamily: 'Roboto, Arial, sans-serif', // Fuentes personalizadas
+        h1: {
+            fontFamily: 'Montserrat, sans-serif',
+        },
+        h2: {
+            fontFamily: 'Montserrat, sans-serif',
+        },
+        h3: {
+            fontFamily: 'Montserrat, sans-serif',
+        },
+        h4: {
+            fontFamily: 'Montserrat, sans-serif',
+        },
+        h5: {
+            fontFamily: 'Montserrat, sans-serif',
+        },
+        h6: {
+            fontFamily: 'Montserrat, sans-serif',
+        },
+        body1: {
+            fontFamily: 'Roboto, sans-serif',
+        },
+    },
+});
+
 const Home = () => {
     return (
-        <Container maxWidth="lg">
-            <Box sx={{ textAlign: 'center', my: 4 }}>
-                <Typography variant="h2" component="h1" gutterBottom>
-                    Simplifica tu gestión financiera con KAXAFA J AUDITORES
-                </Typography>
-                <Typography variant="h5" component="h2" gutterBottom>
-                    Accede y descarga fácilmente todos los formatos financieros que necesitas
-                </Typography>
-                <Button variant="contained" color="primary" size="large" sx={{ mt: 2 }}>
-                    Descargar Formatos Ahora
-                </Button>
-            </Box>
+        <ThemeProvider theme={theme}>
+            <AppBar position="static" color="primary">
+                <Toolbar>
+                    <img src="../4.png" alt="Logo" style={{ width: 50, marginRight: 10 }} />
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        KAXAFA J AUDITORES
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <Container maxWidth="lg">
+                <Box sx={{ textAlign: 'center', my: 4 }}>
+                    <Typography variant="h2" component="h1" gutterBottom>
+                        Simplifica tu gestión financiera con KAXAFA J AUDITORES
+                    </Typography>
+                    <Typography variant="h5" component="h2" gutterBottom>
+                        Accede y descarga fácilmente todos los formatos financieros que necesitas
+                    </Typography>
+                    <Button variant="contained" color="secondary" size="large" sx={{ mt: 2 }}>
+                        Descargar Formatos Ahora
+                    </Button>
+                </Box>
 
-            <Box sx={{ my: 4 }}>
-                <Typography variant="h4" component="h3" gutterBottom>
-                    ¿Por qué elegir KAXAFA J AUDITORES?
-                </Typography>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
-                        <Card>
-                            <CardContent>
-                                <AccessTime fontSize="large" color="primary" />
-                                <Typography variant="h6" component="h4">
-                                    Acceso rápido a formatos financieros
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Card>
-                            <CardContent>
-                                <VerifiedUser fontSize="large" color="primary" />
-                                <Typography variant="h6" component="h4">
-                                    Descargas gratuitas y fáciles
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Card>
-                            <CardContent>
-                                <Description fontSize="large" color="primary" />
-                                <Typography variant="h6" component="h4">
-                                    Información clara y precisa sobre cada documento
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                </Grid>
-            </Box>
-
-            <Box sx={{ my: 4 }}>
-                <Typography variant="h4" component="h3" gutterBottom>
-                    Nuestros Servicios
-                </Typography>
-                <Typography variant="body1">
-                    Ofrecemos una gama de servicios para facilitar la gestión financiera, incluyendo auditorías fiscales, consultoría contable y más.
-                </Typography>
-            </Box>
-
-            <Box sx={{ my: 4 }}>
-                <Typography variant="h4" component="h3" gutterBottom>
-                    Formatos Financieros Disponibles
-                </Typography>
-                <Grid container spacing={3}>
-                    {formats.map((format, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                <Box sx={{ my: 4 }}>
+                    <Typography variant="h4" component="h3" gutterBottom>
+                        ¿Por qué elegir KAXAFA J AUDITORES?
+                    </Typography>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={4}>
                             <Card>
                                 <CardContent>
+                                    <AccessTime fontSize="large" color="primary" />
                                     <Typography variant="h6" component="h4">
-                                        {format.name}
+                                        Acceso rápido a formatos financieros
                                     </Typography>
-                                    <Button
-                                        variant="outlined"
-                                        color="primary"
-                                        size="small"
-                                        sx={{ mt: 1 }}
-                                        href={`/Formatos/${format.file}`}
-                                        download
-                                    >
-                                        Descargar
-                                    </Button>
                                 </CardContent>
                             </Card>
                         </Grid>
-                    ))}
-                </Grid>
-            </Box>
+                        <Grid item xs={12} sm={4}>
+                            <Card>
+                                <CardContent>
+                                    <VerifiedUser fontSize="large" color="primary" />
+                                    <Typography variant="h6" component="h4">
+                                        Descargas gratuitas y fáciles
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                            <Card>
+                                <CardContent>
+                                    <Description fontSize="large" color="primary" />
+                                    <Typography variant="h6" component="h4">
+                                        Información clara y precisa sobre cada documento
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                </Box>
 
-            <Box sx={{ my: 4, textAlign: 'center' }}>
-                <Typography variant="h4" component="h3" gutterBottom>
-                    Contáctanos
-                </Typography>
-                <Typography variant="body1">
-                    Dirección de la oficina, número de teléfono, correo electrónico.
-                </Typography>
-            </Box>
-        </Container>
+                <Box sx={{ my: 4 }}>
+                    <Typography variant="h4" component="h3" gutterBottom>
+                        Nuestros Servicios
+                    </Typography>
+                    <Typography variant="body1">
+                        Ofrecemos una gama de servicios para facilitar la gestión financiera, incluyendo auditorías fiscales, consultoría contable y más.
+                    </Typography>
+                </Box>
+
+                <Box sx={{ my: 4 }}>
+                    <Typography variant="h4" component="h3" gutterBottom>
+                        Formatos Financieros Disponibles
+                    </Typography>
+                    <Grid container spacing={3}>
+                        {formats.map((format, index) => (
+                            <Grid item xs={12} sm={6} md={4} key={index}>
+                                <Card>
+                                    <CardContent>
+                                        <Typography variant="h6" component="h4">
+                                            {format.name}
+                                        </Typography>
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            size="small"
+                                            sx={{ mt: 1 }}
+                                            href={`/Formatos/${format.file}`}
+                                            download
+                                        >
+                                            Descargar
+                                        </Button>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+
+                <Box sx={{ my: 4, textAlign: 'center' }}>
+                    <Typography variant="h4" component="h3" gutterBottom>
+                        Contáctanos
+                    </Typography>
+                    <Typography variant="body1">
+                        Dirección de la oficina, número de teléfono, correo electrónico.
+                    </Typography>
+                </Box>
+            </Container>
+        </ThemeProvider>
     );
 };
 
