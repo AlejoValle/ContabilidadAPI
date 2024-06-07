@@ -12,7 +12,9 @@ import LibroCompras from "./components/LibroCompras";
 import LibroVentasContribuyente from './components/LibroVentasContribuyente'; // Importa el nuevo componente
 import LibroVentasConsumidor from "./components/LibroVentasConsumidor";
 import CapitalLibro from "./components/CapitalLibro";
-import './App.css';  // Importa el CSS global
+import MobileMenu from "./components/MobileMenu";
+import './App.css';
+
 const App = () => {
     return (
         <Router>
@@ -28,6 +30,7 @@ const App = () => {
                 <Route path="/LibroVentasContribuyente" element={<LibroVentasContribuyente />} /> {/* Agrega la nueva ruta */}
                 <Route path="/LibroVentasConsumidor" element={<LibroVentasConsumidor />} />
                 <Route path="/CapitalLibro" element={<CapitalLibro />} />
+                <Route path="/Movil/*" element={<MobileMenu />} />
             </Routes>
         </Router>
     );

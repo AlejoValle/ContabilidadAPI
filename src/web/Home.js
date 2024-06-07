@@ -39,7 +39,7 @@ const theme = createTheme({
             paper: '#FFFFFF', // Fondo de los elementos
         },
         text: {
-            primary: '#8B4513', // Texto Marrón
+            primary: '#000000', // Texto Marrón
             secondary: '#D3D3D3', // Texto Gris claro
         },
     },
@@ -74,7 +74,7 @@ const Home = () => {
         <ThemeProvider theme={theme}>
             <AppBar position="static" color="primary">
                 <Toolbar>
-                    <img src="../4.png" alt="Logo" style={{ width: 50, marginRight: 10 }} />
+                    <img src="/4.png" alt="Logo" style={{ width: 50, marginRight: 10 }} />
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         KAXAFA J AUDITORES
                     </Typography>

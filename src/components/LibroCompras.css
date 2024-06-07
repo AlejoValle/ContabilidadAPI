@@ -53,8 +53,7 @@
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 1200px; /* Ajusta según sea necesario */
+    width: 100%; /* Ajusta según sea necesario */
     box-sizing: border-box;
 }
 
